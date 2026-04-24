@@ -2,6 +2,8 @@
 
 A comprehensive Chrome extension for detecting and highlighting WCAG accessibility issues on any webpage.
 
+> **Note:** This extension was developed with AI assistance as a starting point for analyzing pages for accessibility issues. Feel free to submit a PR with potential optimizations.
+
 ## Features
 
 ### Accessibility Checks (v2.0)
