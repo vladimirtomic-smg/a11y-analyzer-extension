@@ -1,26 +1,43 @@
 .a11y-highlight {
-    outline: 3px solid orange !important;
+    outline: 3px solid #f59e0b !important;
+    outline-offset: 2px !important;
     position: relative !important;
 }
 
 .a11y-critical {
-    outline-color: #e53e3e !important;
+    outline-color: #dc2626 !important;
+    outline-width: 4px !important;
 }
 
 .a11y-serious {
-    outline-color: #dd6b20 !important;
+    outline-color: #ea580c !important;
+}
+
+.a11y-moderate {
+    outline-color: #f59e0b !important;
+    outline-width: 2px !important;
 }
 
 .a11y-tooltip {
     position: absolute;
-    top: -60px;
+    top: calc(100% + 8px);
     left: 0;
     background: #1a202c;
     color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
     font-size: 12px;
+    line-height: 1.4;
     z-index: 999999;
-    width: 250px;
+    min-width: 200px;
+    max-width: 320px;
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.a11y-highlight:hover .a11y-tooltip,
+.a11y-highlight:focus .a11y-tooltip {
+    opacity: 1;
 }

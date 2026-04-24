@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 { color: #333; }
+        button, a {
+            margin: 5px;
+            padding: 8px 16px;
+        }
+        input, select, textarea {
+            margin: 10px 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accessibility Analyzer Test Page</h1>
+    <p>This page contains various accessibility issues for testing the extension.</p>
+
+    <!-- CRITICAL: Missing alt attributes -->
+    <div class="section">
+        <h2>Images</h2>
+        <img src="https://via.placeholder.com/150" width="150">
+        <img src="https://via.placeholder.com/150" alt="Sample image with alt text" width="150">
+        <img src="https://via.placeholder.com/150" alt="" width="150"> <!-- Decorative -->
+        <svg width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="red" />
+        </svg>
+        <svg width="100" height="100" aria-label="Blue circle">
+            <circle cx="50" cy="50" r="40" fill="blue" />
+        </svg>
+    </div>
+
+    <!-- CRITICAL: Buttons/links without labels -->
+    <div class="section">
+        <h2>Interactive Elements</h2>
+        <button>Good Button</button>
+        <button></button> <!-- No label -->
+        <button aria-label="Close dialog"></button> <!-- Icon button with aria-label -->
+        <a href="#"></a> <!-- Empty link -->
+        <a href="#">Good Link</a>
+        <a href="#" aria-label="Navigate to home page"></a> <!-- Icon link with aria-label -->
+    </div>
+
+    <!-- SERIOUS: Form inputs without labels -->
+    <div class="section">
+        <h2>Form Inputs</h2>
+        <label for="good-input">Good Input:</label>
+        <input type="text" id="good-input">
+        
+        <input type="text" placeholder="No label input">
+        
+        <label>
+            <span>Implicit label:</span>
+            <input type="text">
+        </label>
+        
+        <input type="text" aria-label="Search query">
+        
+        <select>
+            <option>No label select</option>
+        </select>
+        
+        <textarea placeholder="No label textarea"></textarea>
+    </div>
+
+    <!-- MODERATE: Heading hierarchy issues -->
+    <div class="section">
+        <h2>Heading Hierarchy</h2>
+        <h4>This skips h3!</h4>
+        <p>Heading levels should not be skipped.</p>
+    </div>
+
+    <!-- MODERATE: Ambiguous links -->
+    <div class="section">
+        <h2>Links</h2>
+        <a href="/page1">Read more</a>
+        <a href="/page2">Read more</a>
+        <a href="/page3">Read more</a>
+    </div>
+
+    <!-- SERIOUS: Duplicate IDs -->
+    <div class="section">
+        <h2>Duplicate IDs</h2>
+        <div id="duplicate">First element with ID</div>
+        <div id="duplicate">Second element with same ID</div>
+        <div id="duplicate">Third element with same ID</div>
+    </div>
+
+    <!-- MODERATE: Positive tabindex -->
+    <div class="section">
+        <h2>Tab Order</h2>
+        <button tabindex="1">Bad: tabindex 1</button>
+        <button tabindex="2">Bad: tabindex 2</button>
+        <button tabindex="0">Good: tabindex 0</button>
+        <button>Good: no tabindex</button>
+    </div>
+
+    <!-- Test: Page should have main landmark -->
+    <footer>
+        <p>&copy; 2026 Accessibility Test Page</p>
+    </footer>
+</body>
+</html>

@@ -1,12 +1,10 @@
 {
     "manifest_version": 3,
     "name": "Accessibility Analyzer",
-    "version": "1.0",
-    "description": "Analyze and highlight accessibility issues on any webpage",
+    "version": "2.0",
+    "description": "Comprehensive WCAG accessibility analyzer with visual highlights and detailed reports",
     "permissions": [
-        "activeTab",
-        "scripting",
-        "storage"
+        "activeTab"
     ],
     "host_permissions": [
         "<all_urls>"
@@ -30,7 +28,11 @@
             ],
             "css": [
                 "content.css"
-            ]
+            ],
+            "run_at": "document_idle"
         }
-    ]
+    ],
+    "icons": {
+        "48": "icons/icon48.png"
+    }
 }
