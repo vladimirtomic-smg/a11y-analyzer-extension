@@ -4,7 +4,8 @@
     "version": "2.0",
     "description": "Comprehensive WCAG accessibility analyzer with visual highlights and detailed reports",
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "scripting"
     ],
     "host_permissions": [
         "<all_urls>"

@@ -1,15 +1,23 @@
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "ping") {
+        // Respond to ping to confirm content script is loaded
+        sendResponse({ ready: true });
+        return true;
+    }
+    
     if (message.action === "analyze") {
         clearHighlights();
         const results = runAccessibilityAudit();
         highlightIssues(results);
         sendResponse({ issues: serializeIssues(results) });
     }
+    
     if (message.action === "clear") {
         clearHighlights();
         sendResponse({ cleared: true });
     }
+    
     return true;
 });
 

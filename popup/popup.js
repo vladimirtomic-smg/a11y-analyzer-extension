@@ -6,6 +6,9 @@ document.getElementById("analyze-btn").addEventListener("click", async () => {
     status.textContent = "Analyzing...";
     results.innerHTML = "";
 
+    // Ensure content script is injected before sending message
+    await ensureContentScriptInjected(tab.id);
+
     chrome.tabs.sendMessage(tab.id, { action: "analyze" }, (response) => {
         if (chrome.runtime.lastError) {
             status.textContent = "Error: " + chrome.runtime.lastError.message;
@@ -46,11 +49,33 @@ document.getElementById("analyze-btn").addEventListener("click", async () => {
 
 document.getElementById("clear-btn").addEventListener("click", async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    // Ensure content script is injected before sending message
+    await ensureContentScriptInjected(tab.id);
+    
     chrome.tabs.sendMessage(tab.id, { action: "clear" }, () => {
         document.getElementById("results").innerHTML = "";
         document.getElementById("status").textContent = "Highlights cleared.";
     });
 });
+
+async function ensureContentScriptInjected(tabId) {
+    try {
+        // Try to ping the content script
+        await chrome.tabs.sendMessage(tabId, { action: "ping" });
+    } catch (error) {
+        // Content script not loaded, inject it manually
+        await chrome.scripting.executeScript({
+            target: { tabId: tabId },
+            files: ["content.js"]
+        });
+        
+        await chrome.scripting.insertCSS({
+            target: { tabId: tabId },
+            files: ["content.css"]
+        });
+    }
+}
 
 function escapeHtml(text) {
     const div = document.createElement("div");
