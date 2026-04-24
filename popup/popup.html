@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Accessibility Analyzer</title>
+    <style>
+        body {
+            width: 320px;
+            font-family: sans-serif;
+            padding: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .issue {
+            border-left: 4px solid orange;
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            background: #fff8f0;
+        }
+
+        .issue--critical {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+
+        .issue--serious {
+            border-color: #dd6b20;
+            background: #fffaf0;
+        }
+
+        .badge {
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        #status {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="margin-top: 0">Accessibility Analyzer</h3>
+    <button id="analyze-btn">Analyze Page</button>
+    <button id="clear-btn">Clear Highlights</button>
+    <div id="status"></div>
+    <div id="results"></div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
